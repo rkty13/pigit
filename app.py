@@ -20,8 +20,7 @@ def createRepo(repo_name, user_list):
 		for user in user_list:
 			subprocess.call(["groups", user, "-aG", repo_name])
 		subprocess.call(["mkdir", repo_dir])
-		subprocess.call(["cd", repo_dir])
-		subprocess.call(["git", "init", "--bare"])
+		subprocess.call(["git", "init", "--bare", repo_dir + "/.git"])
 		subprocess.call(["touch", "repos/test.txt"])
 		return True
 	else:

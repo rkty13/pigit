@@ -1,8 +1,8 @@
 <html>
 	<head>
 		<title>Hackathon Wifi Sucks</title>
-
-
+		<script type="text/javascript" src="/static/js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="/static/js/addField.js"></script>
 
 	</head>
 
@@ -10,15 +10,24 @@
 		{{ error }}
 
 		<form action="/" method="post">
-			Repository Name:<br> 
-			<input type="text" name="repo_name">
-			</br>
+			<fieldset>
+				<legend>Repository Information</legend>
+				Repo Name:<br> 
+				<input type="text" name="repo_name">
+				</br>
 
-			User 1: <br>
-			<input type="text" name="user1">
-			</br>
-
+				<legend>Users:</legend>
+					<div class="input_fields">
+						<div>
+							<br>
+							<input type="text" name="users[]">
+							</br>
+						</div>
+					</div>
+				<button class="add_field">Add More Users</button>
+			</fieldset>
 			<input type="submit" name="Sumbit">
+			
 		</form>
 
 	</body>

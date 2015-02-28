@@ -5,7 +5,7 @@ from subprocess import Popen, PIPE
 app = Flask(__name__)
 
 def createRepo(repo_name, user_list):
-	print "hi"
+	
 
 @app.route('/', methods=["POST"])
 def index():

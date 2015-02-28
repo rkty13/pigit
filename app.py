@@ -1,24 +1,22 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import os
-from subprocess import Popen, PIPE
+import subprocess
 
 app = Flask(__name__)
 
 def createRepo(repo_name, user_list):
-	print "TODO"
+	subprocess.call(["touch", "repos/test.txt"])
 
-@app.route('/', methods=["POST"])
+@app.route('/', methods=['GET', 'POST'])
 def index():
 	if request.method == 'POST':
-		form = request.form
-		repo_name = form['repo_name']
+		repo_name = request.form['repo_name']
 		user_list = []
-		for i in range(form['num_users']):
-			user_list.append(form['user' + str(i)])
+		user_list.append(request.form['user1'])
 		createRepo(repo_name, user_list)
+		return render_template("index.html")
 
-	(stdout, stderr) = Popen(["ls", "../"], stdout=PIPE).communicate()
-	return render_template("index.html", stdout=stdout)
+	return render_template("index.html")
 
 if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 5000))

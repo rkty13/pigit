@@ -15,12 +15,22 @@ def checkRepoExists(repo_name):
 
 def createRepo(repo_name, user_list):
 	if (not checkRepoExists(repo_name)):
-		repo_dir = "repos/" + str(repo_name)
+		repo_dir = "repos/" + str(repo_name) + ".git"
+		# Create group and users
 		subprocess.call(["groupadd", repo_name])
 		for user in user_list:
 			subprocess.call(["groups", user, "-aG", repo_name])
+
+		# Create repository directory
 		subprocess.call(["mkdir", repo_dir])
-		subprocess.call(["git", "init", "--bare", repo_dir + "/.git"])
+
+		# Create init git repository
+		subprocess.call(["git", "init", "--bare", repo_dir])
+
+		# Make accessible to all group members
+		subprocess.call(["chgrp", "-R", repo_name, repo_dir])
+		subprocess.call(["chmod", "-R", "g+swX", repo_dir])
+
 		subprocess.call(["touch", "repos/test.txt"])
 		return True
 	else:

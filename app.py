@@ -25,7 +25,7 @@ def createRepo(repo_name, user_list):
 		subprocess.call(["mkdir", repo_dir])
 
 		# Create init git repository
-		subprocess.call(["git", "init", "--bare", repo_dir])
+		subprocess.call(["git", "init", "--bare", repo_dir + "/.git"])
 
 		# Make accessible to all group members
 		subprocess.call(["chgrp", "-R", repo_name, repo_dir])

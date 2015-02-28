@@ -4,8 +4,19 @@ from subprocess import Popen, PIPE
 
 app = Flask(__name__)
 
-@app.route('/')
+def createRepo(repo_name, user_list):
+	print "hi"
+
+@app.route('/', methods=["POST"])
 def index():
+	if request.method == 'POST':
+		form = request.form
+		repo_name = form['repo_name']
+		user_list = []
+		for i in range(form['num_users']):
+			user_list.append(form['user' + str(i)])
+		createRepo(repo_name, user_list)
+
 	(stdout, stderr) = Popen(["ls", "../"], stdout=PIPE).communicate()
 	return render_template("index.html", stdout=stdout)
 

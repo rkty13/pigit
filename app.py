@@ -16,20 +16,12 @@ def checkRepoExists(repo_name):
 def createRepo(repo_name, user_list):
 	if (not checkRepoExists(repo_name)):
 		repo_dir = "repos/" + str(repo_name) + ".git"
-		# Create group and users
-		#subprocess.call(["sudo", "groupadd", repo_name])
-		#for user in user_list:
-		#	subprocess.call(["sudo", "groups", user, "-G", repo_name])
 
 		# Create repository directory
 		subprocess.call(["mkdir", repo_dir])
 
 		# Create init git repository
 		subprocess.call(["git", "init", "--bare", repo_dir + "/.git"])
-
-		# Make accessible to all group members
-		#subprocess.call(["sudo", "chgrp", "-R", repo_name, repo_dir])
-		#subprocess.call(["sudo", "chmod", "-R", "g+swX", repo_dir])
 
 		subprocess.call(["touch", "repos/test.txt"])
 		return True
@@ -40,12 +32,12 @@ def createRepo(repo_name, user_list):
 def index():
 	if request.method == 'POST':
 		repo_name = request.form['repo_name']
-		user_list = []
-		user_list.append(request.form['user1'])
-		if (createRepo(repo_name, user_list)):
-			return render_template("index.html")
+		if (createRepo(repo_name)):
+			successMessage = "Success! clone the repository at pi@192.168.10.1:/home/pi/pigit/repos/" + repo_name
+			return render_template("index.html", sucess=successMessage)
 		else:
-			return render_template("index.html", error="Repo Exists")
+			errorMessage = "Repo Exists Already!"
+			return render_template("index.html", error=errorMessage)
 
 	return render_template("index.html")
 

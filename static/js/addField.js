@@ -8,7 +8,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		if(i < maxFields){
 			i++;
-			$(wrapper).append('<div><input type="text" name="users[]"/> <a href="#" class="remove_field">Remove</a></div>');
+			$(wrapper).append('<div><input type="text" name="users'+i+'"/> <a href="#" class="remove_field">Remove</a></div>');
 		}
 	});
 

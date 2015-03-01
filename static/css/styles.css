@@ -22,6 +22,11 @@ h3 {
 	margin: 0;
 }
 
+.exist_repo {
+    padding: 10px 0;
+    margin: 0;
+}
+
 #repo_name {
 	padding: 5px 10px;
     border: solid 2px #000;

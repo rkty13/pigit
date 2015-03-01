@@ -15,6 +15,11 @@
 				<input type="text" name="repo_name" id="repo_name">
 				<input type="submit" name="Sumbit" value="Create" id="new_repo">
 			</form>
+
+			<h2>Existing Repositories</h2>
+			{% for repo in r_list %}
+				<h3 class="exist_repo">{{ repo }}</h3>
+			{% endfor %}
 		</div>
 	</body>
 </html>

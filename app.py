@@ -13,7 +13,7 @@ def checkRepoExists(repo_name):
 	else:
 		return False
 
-def createRepo(repo_name, user_list):
+def createRepo(repo_name):
 	if (not checkRepoExists(repo_name)):
 		repo_dir = "repos/" + str(repo_name) + ".git"
 
@@ -28,18 +28,25 @@ def createRepo(repo_name, user_list):
 	else:
 		return False
 
+def listRepos():
+	(stdout, stderr) = Popen(["ls", "repos"], stdout=PIPE).communicate();
+	repo_list = stdout.split("\n")
+	return repo_list
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
+	r_list = listRepos()
 	if request.method == 'POST':
 		repo_name = request.form['repo_name']
 		if (createRepo(repo_name)):
 			successMessage = "Success! clone the repository at pi@192.168.10.1:/home/pi/pigit/repos/" + repo_name
-			return render_template("index.html", sucess=successMessage)
+			return render_template("index.html", sucess=successMessage, r_list=r_list)
 		else:
 			errorMessage = "Repo Exists Already!"
-			return render_template("index.html", error=errorMessage)
+			return render_template("index.html", error=errorMessage, r_list=r_list)
 
-	return render_template("index.html")
+	return render_template("index.html", r_list=r_list)
 
 if __name__ == '__main__':
 	port = int(os.environ.get('PORT', 5000))

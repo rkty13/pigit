@@ -1,38 +1,20 @@
 <html>
 	<head>
 		<title>Hackathon Wifi Sucks</title>
-	<!---	<script type="text/javascript" src="/static/js/jquery-1.11.2.min.js"></script>
-		<script type="text/javascript" src="/static/js/addField.js"></script> -->
-
+		<link rel="stylesheet" href="/static/css/styles.css"/>
 	</head>
 
 	<body>
-		{{ error }}
-
-		<form action="/" method="post">
-			<fieldset>
-				<legend>Repository Information</legend>
-				Repo Name:<br> 
-				<input type="text" name="repo_name">
-				</br>
-
-	<!--			<legend>Users:</legend>
-					<div class="input_fields">
-						<div>
-							<br>
-							<input type="text" name="user1">
-							</br>
-						</div>
-					</div>
-				<button class="add_field">Add More Users</button> -->
-			</fieldset>
-			<input type="submit" name="Sumbit">
-			
-		</form>
-
+		<div class="center">
+			<h1>PiGit</h1>
+			<h3>A local git server for when the hackathon wifi just ain't doin git</h3>
+			<span>{{ error }}</span>
+			<span>{{ success }}</span>
+			<h2>New Repository</h2>
+			<form action="/" method="post">
+				<input type="text" name="repo_name" id="repo_name">
+				<input type="submit" name="Sumbit" value="Create" id="new_repo">
+			</form>
+		</div>
 	</body>
-
-
-
-
 </html>
